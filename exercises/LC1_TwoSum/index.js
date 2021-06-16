@@ -9,13 +9,32 @@
 function twoSum(arr, target) {
   //time complexity O(N^2)
   //space complexity O(N)
+  // for(let i = 0; i < arr.length; i++){
+  //   for(let j = i + 1; j < arr.length; j++){
+  //     if(arr[i] + arr[j] === target){
+  //       return [i, j]
+  //     }
+  //   }
+  // }
+
+
+  //time complexity O(N) hash lookup is O(1) so only the for loop adds time
+  //space complexity O(N)
+  let sums = [];
+  let hash = {};
+
   for(let i = 0; i < arr.length; i++){
-    for(let j = i + 1; j < arr.length; j++){
-      if(arr[i] + arr[j] === target){
-        return [i, j]
-      }
+
+    let minusTarget = target - arr[i];
+
+    if(hash[minusTarget] !== undefined){
+      sums = [i, hash[minusTarget]]
     }
+
+    hash[arr[i]] = i;
   }
+
+  return sums;
 }
 
 module.exports = twoSum;
